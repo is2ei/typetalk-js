@@ -1,6 +1,12 @@
 typetalk-js
 ===
 
+## Install
+
+```
+$ npm i typetalk
+```
+
 ## Example Usage
 
 ```javascript
