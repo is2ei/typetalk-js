@@ -1,6 +1,10 @@
 typetalk-js
 ===
 
+[![Build Status](https://travis-ci.com/is2ei/typetalk-js.svg?branch=master)][travis]
+
+[travis]: https://travis-ci.com/is2ei/typetalk-js
+
 ## Install
 
 ```
