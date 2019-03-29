@@ -18,7 +18,7 @@ class Client {
         });
 
         const url = Constants.Endpoints.PostMessage(topic.id);
-        request
+        return request
             .post(url, data)
             .then((res) => res.json())
             .catch((err) => err);
