@@ -8,10 +8,6 @@ class Client {
         this.token = options.token;
     }
 
-    getMessages (data, topic) {
-
-    }
-
     postMessage (data, topic) {
         const request = new Request({
             token: this.token
