@@ -1,3 +1,5 @@
+"use strict";
+
 /* eslint-env es6, node, mocha */
 const chai = require("chai");
 const {expect} = chai;
@@ -6,7 +8,6 @@ const Request = require("../src/request"),
     TestServer = require("./server");
 
 const local = new TestServer();
-const base = `http://${local.hostname}:${local.port}/`;
 
 before((done) => {
     local.start(done);
@@ -17,6 +18,8 @@ after((done) => {
 });
 
 describe("Request", () => {
+    const base = `http://${local.hostname}:${local.port}/`;
+
     describe("get", () => {
         it("should return a promise", (done) => {
             const r = new Request({

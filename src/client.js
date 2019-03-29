@@ -1,3 +1,5 @@
+"use strict";
+
 const Constants = require("./constants"),
     Request = require("./request");
 
@@ -10,10 +12,10 @@ class Client {
 
     postMessage (data, topic) {
         const request = new Request({
-            token: this.token
-        });
+                token: this.token
+            }),
+            url = Constants.Endpoints.postMessage(topic.id);
 
-        const url = Constants.Endpoints.PostMessage(topic.id);
         return request
             .post(url, data)
             .then((res) => res.json())
