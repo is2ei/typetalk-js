@@ -4,24 +4,30 @@ const Constants = require("./constants"),
     Request = require("./request");
 
 
+function getAndSetAccessToken (client) {
+    return client.getAccessToken({
+        client_id: client.clientId,
+        client_secret: client.clientSecret,
+        scope: client.scope
+    })
+    .then((res) => {
+        client.token = res.access_token;
+        client.tokenType = res.token_type;
+        client.expires_in = res.expires_in;
+        client.refresh_token = res.refresh_token;
+    })
+    .catch((err) => err);
+}
+
 class Client {
 
     constructor (options = {}) {
         this.token = options.token;
         this.isBot = this.token? true : false;
         if (!this.isBot) {
-            const res = this.getAccessToken({
-                client_id: options.clientId,
-                client_secret: options.clientSecret,
-                grant_type: "client_credentials",
-                scope: options.scope? options.scope: "my"
-            })
-            .then((res) => res.json())
-            .catch((err) => err);
-            this.token = res.access_token;
-            this.tokenType = res.token_type;
-            this.expires_in = res.expires_in;
-            this.refresh_token = res.refresh_token;
+            this.clientId = options.clientId;
+            this.clientSecret = options.clientSecret;
+            this.scope = options.scope? options.scope : "my";
         }
     }
 
@@ -58,6 +64,17 @@ class Client {
         }),
         url = Constants.Endpoints.createTopic();
 
+        if (!this.isBot && !this.token) {
+            return getAndSetAccessToken(this)
+                .then(() => {
+                    request.token = this.token;
+                    return request
+                        .post(url, data)
+                        .then((res) => res.json())
+                        .catch((err) => err);
+                })
+                .catch((err) => err);
+        }
         return request
             .post(url, data)
             .then((res) => res.json())
