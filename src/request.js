@@ -6,25 +6,36 @@ class Request {
 
     constructor (options = {}) {
         this.token = options.token;
+        this.isBot = options.isBot;
     }
 
     get (url) {
+        const headers = {},
+            method = "get";
+        if (this.isBot) {
+            headers["X-Typetalk-Token"] = this.token;
+        } else {
+            headers["Authorization"] = `Bearer ${this.token}`;
+        }
         return fetch(url, {
-            headers: {
-                "X-Typetalk-Token": this.token
-            },
-            method: "get"
+            headers,
+            method
         });
     }
 
     post (url, data) {
+        const body = JSON.stringify(data),
+            headers = {"Content-Type": "application/json"},
+            method = "post";
+        if (this.isBot) {
+            headers["X-Typetalk-Token"] = this.token;
+        } else {
+            headers["Authorization"] = `Bearer ${this.token}`;
+        }
         return fetch(url, {
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-                "X-Typetalk-Token": this.token
-            },
-            method: "post"
+            body,
+            headers,
+            method
         });
     }
 
