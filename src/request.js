@@ -12,10 +12,12 @@ class Request {
     get (url) {
         const headers = {},
             method = "get";
-        if (this.isBot) {
-            headers["X-Typetalk-Token"] = this.token;
-        } else {
-            headers["Authorization"] = `Bearer ${this.token}`;
+        if (this.token) {
+            if (this.isBot) {
+                headers["X-Typetalk-Token"] = this.token;
+            } else {
+                headers["Authorization"] = `Bearer ${this.token}`;
+            }
         }
         return fetch(url, {
             headers,
@@ -27,10 +29,12 @@ class Request {
         const body = JSON.stringify(data),
             headers = {"Content-Type": "application/json"},
             method = "post";
-        if (this.isBot) {
-            headers["X-Typetalk-Token"] = this.token;
-        } else {
-            headers["Authorization"] = `Bearer ${this.token}`;
+        if (this.token) {
+            if (this.isBot) {
+                headers["X-Typetalk-Token"] = this.token;
+            } else {
+                headers["Authorization"] = `Bearer ${this.token}`;
+            }
         }
         return fetch(url, {
             body,
