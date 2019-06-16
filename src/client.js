@@ -9,7 +9,7 @@ class Client {
     constructor (options = {}) {
         this.token = options.token;
         this.isBot = this.token? true : false;
-        if (!isBot) {
+        if (!this.isBot) {
             const res = this.getAccessToken({
                 client_id: options.clientId,
                 client_secret: options.clientSecret,
