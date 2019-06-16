@@ -32,6 +32,7 @@ class Client {
     }
 
     getAccessToken (data) {
+        data["grant_type"] = "client_credentials";
         const request = new Request({
                 token: this.token,
                 isBot: this.isBot
