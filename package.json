@@ -1,6 +1,6 @@
 {
     "name": "typetalk",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "Yet another Typetalk API Client",
     "main": "./src/index",
     "types": "./typings/index.d.ts",
