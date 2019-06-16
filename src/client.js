@@ -52,6 +52,16 @@ class Client {
             }),
             url = Constants.Endpoints.postMessage(topic.id);
 
+        if (!this.isBot && !this.token) {
+            return getAndSetAccessToken(this)
+                .then(() => {
+                    request.token = this.token;
+                    return request
+                        .post(url, data)
+                        .then((res) => res.json())
+                        .catch((err) => err);
+                })
+        }
         return request
             .post(url, data)
             .then((res) => res.json())
@@ -62,8 +72,8 @@ class Client {
         const request = new Request({
             token: this.token,
             isBot: this.isBot
-        }),
-        url = Constants.Endpoints.createTopic();
+            }),
+            url = Constants.Endpoints.createTopic();
 
         if (!this.isBot && !this.token) {
             return getAndSetAccessToken(this)
