@@ -15,12 +15,15 @@ $ npm i typetalk
 
 ## Example Usage
 
+### Using Bot’s Typetalk Token
+
 ```javascript
-const config = require('./config');
 const Typetalk = require('typetalk');
-const client = new Typetalk.Client({
-    config.TYPETALK_TOKEN
+const bot = new Typetalk.Bot({
+    env.process.TYPETALK_TOKEN
 });
 
-client.PostMessage();
+bot.postMessage({
+    message: 'Hello, world!'
+});
 ```
