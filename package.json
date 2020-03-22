@@ -2,17 +2,19 @@
     "name": "typetalk",
     "version": "0.0.10",
     "description": "Yet another Typetalk API Client",
+    "license": "MIT",
     "main": "./src/index",
-    "types": "./typings/index.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/is2ei/typetalk-js"
     },
-    "license": "MIT",
     "scripts": {
         "lint": "eslint ./src/*.js ./test/*.js",
         "lint:typings": "tslint typings/index.d.ts",
         "test": "mocha"
+    },
+    "dependencies": {
+        "node-fetch": "2.6.0"
     },
     "devDependencies": {
         "chai": "^4.2.0",
@@ -20,7 +22,5 @@
         "mocha": "7.1.1",
         "typescript": "3.8.3"
     },
-    "dependencies": {
-        "node-fetch": "2.6.0"
-    }
+    "types": "./typings/index.d.ts"
 }
